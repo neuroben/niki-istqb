@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Quiz from "./Quiz";
+import { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
 
 const router = createBrowserRouter(
   [
@@ -8,12 +10,12 @@ const router = createBrowserRouter(
     { path: "/quiz", element: <Quiz /> },
   ],
   {
-    basename: "/pet-project", // <-- set your base path here
+    basename: "/pet-project",
   }
 );
 
-function Main() {
-  return <RouterProvider router={router} />;
-}
-
-export default Main;
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>
+);
