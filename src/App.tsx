@@ -21,7 +21,7 @@ function App() {
           id="questionCount"
           type="number"
           min={1}
-          max={50}
+          max={100}
           className="form-control mb-4 bg-light text-light"
           value={questionCount}
           onChange={(e) => setQuestionCount(Number(e.target.value))}
