@@ -1,18 +1,19 @@
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
-import "bootstrap/dist/css/bootstrap.css";
-import { StrictMode } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Quiz from "./Quiz.tsx";
-import "./index.css";
+import App from "./App";
+import Quiz from "./Quiz";
 
-const router = createBrowserRouter([
-  { path: "/", element: <App /> },
-  { path: "/quiz", element: <Quiz /> },
-]);
-
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+const router = createBrowserRouter(
+  [
+    { path: "/", element: <App /> },
+    { path: "/quiz", element: <Quiz /> },
+  ],
+  {
+    basename: "/pet-project", // <-- set your base path here
+  }
 );
+
+function Main() {
+  return <RouterProvider router={router} />;
+}
+
+export default Main;
