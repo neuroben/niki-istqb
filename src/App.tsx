@@ -6,9 +6,15 @@ function App() {
 
   return (
     <div
-      className="d-flex justify-content-center align-items-center vh-100"
+      className="d-flex flex-column justify-content-center align-items-center vh-100"
       style={{ backgroundColor: "#181a1b" }}
     >
+      <div
+        className="mb-4 text-center fw-light"
+        style={{ fontSize: "2.2rem", color: "#f8f9fa", letterSpacing: "1px" }}
+      >
+        Mikroelektromechanikai rendszerek
+      </div>
       <div
         className="card p-4 shadow"
         style={{ minWidth: 320, background: "#23272b" }}
