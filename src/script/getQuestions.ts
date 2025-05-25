@@ -10,7 +10,7 @@ function shuffle<T>(array: T[]): T[] {
 
 export async function loadQuestions(count: number): Promise<Question[]> {
   try {
-    const data = await fetch("/data/Questions_save_cleaned.json").then((r) =>
+    const data = await fetch("/pet-project/data/Questions_save_cleaned.json").then((r) =>
       r.json()
     );
     const filtered = data.questions_full.filter(

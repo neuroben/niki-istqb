@@ -22,7 +22,7 @@ function QuizCard({ statement, options, onNext }: Props) {
 
   function handleExternalTrigger() {
     //const selectedItems = selectedIndices.map((i) => items[i]);
-    console.log("Kiválasztott elemek: ", selectedIndices);
+    //console.log("Kiválasztott elemek: ", selectedIndices);
     const isCorrect = checkAnswer(selectedIndices, options as MultiOption[]);
     {
       /*if (isCorrect) {

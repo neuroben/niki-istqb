@@ -1,8 +1,10 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App";
-import Quiz from "./Quiz";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import "bootstrap/dist/css/bootstrap.css";
 import { StrictMode } from "react";
-import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Quiz from "./Quiz.tsx";
+import "./index.css";
 
 const router = createBrowserRouter(
   [
@@ -14,7 +16,7 @@ const router = createBrowserRouter(
   }
 );
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>

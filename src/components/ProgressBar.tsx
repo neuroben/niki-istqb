@@ -14,7 +14,7 @@ function ProgressBar({
   classN = "",
 }: Props) {
   const width = 100 / statementNumber;
-  console.log("answer tömb:", answer);
+  //console.log("answer tömb:", answer);
   return (
     <div className={`progress ${classN}`}>
       {Array.from({ length: progress }).map((_, idx) => (
