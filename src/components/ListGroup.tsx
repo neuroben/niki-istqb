@@ -1,5 +1,3 @@
-//import type { MouseEvent } from "react";
-
 interface Props {
   items: string[];
   selectedIndices: number[];
@@ -7,14 +5,30 @@ interface Props {
   onSelectItem: (item: string) => void;
 }
 
-function ListGroup({ items, selectedIndices, setSelectedIndices }: Props) {
-  //let items = ["New York", "Budapest", "San Fransisco", "Paris"];
+function isTrueFalseItems(items: string[]): boolean {
+  // Csak akkor true, ha pontosan két elem van, és mindkettő 'Igaz' vagy 'Hamis'
+  return (
+    items.length === 2 &&
+    items.every((txt) => txt === "Igaz" || txt === "Hamis")
+  );
+}
 
+function ListGroup({ items, selectedIndices, setSelectedIndices }: Props) {
+  // Egy index hozzáadása vagy eltávolítása a kijelöltek közül
   function toggleIndex(prev: number[], index: number) {
-    if (prev.includes(index) == true) {
+    if (prev.includes(index)) {
       return prev.filter((i) => i !== index);
     } else {
       return [...prev, index];
+    }
+  }
+
+  // Kattintás kezelése egy elemre
+  function handleItemClick(index: number) {
+    if (isTrueFalseItems(items)) {
+      setSelectedIndices([index]);
+    } else {
+      setSelectedIndices((prev) => toggleIndex(prev, index));
     }
   }
 
@@ -33,9 +47,7 @@ function ListGroup({ items, selectedIndices, setSelectedIndices }: Props) {
                 : "list-group-item") + " text-center"
             }
             key={item}
-            onClick={() => {
-              setSelectedIndices((prev) => toggleIndex(prev, index));
-            }}
+            onClick={() => handleItemClick(index)}
           >
             {item}
           </li>
