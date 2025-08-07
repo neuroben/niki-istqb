@@ -5,9 +5,7 @@ import { loadQuestions } from "./script/getQuestions.ts";
 import { useEffect } from "react";
 import type {
   Question,
-  MultiQuestion,
   MultiOption,
-  ExamQuestion,
 } from "./types/questionTypes";
 import Counter from "./components/Counter.tsx";
 import EndQuiz from "./components/EndQuiz.tsx";
