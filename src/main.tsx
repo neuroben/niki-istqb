@@ -12,7 +12,7 @@ const router = createBrowserRouter(
     { path: "/quiz", element: <Quiz /> },
   ],
   {
-    basename: "/mikroelektromechanikai-rendszerek",
+    basename: "/niki-istqb",
   }
 );
 

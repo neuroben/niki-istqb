@@ -11,7 +11,7 @@ function shuffle<T>(array: T[]): T[] {
 export async function loadQuestions(count: number): Promise<Question[]> {
   try {
     // Először próbáljuk az új exam_questions.json formátumot
-    const examData = await fetch("/mikroelektromechanikai-rendszerek/data/exam_questions.json").then((r) =>
+    const examData = await fetch("/niki-istqb/data/exam_questions.json").then((r) =>
       r.json()
     );
     
@@ -33,7 +33,7 @@ export async function loadQuestions(count: number): Promise<Question[]> {
 
   try {
     // Fallback a régi formátumra
-    const data = await fetch("/mikroelektromechanikai-rendszerek/data/Questions_save_cleaned.json").then((r) =>
+    const data = await fetch("/niki-istqb/data/Questions_save_cleaned.json").then((r) =>
       r.json()
     );
     const filtered = data.questions_full.filter(
