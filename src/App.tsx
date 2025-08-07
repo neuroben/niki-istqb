@@ -35,7 +35,7 @@ function App() {
       style={styles.container}
     >
       <div className="mb-4 text-center fw-light" style={styles.title}>
-        Mikroelektromechanikai rendszerek
+        ISTQB CTFL
       </div>
 
       <div className="card p-4 shadow" style={styles.card}>

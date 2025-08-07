@@ -1,4 +1,4 @@
-import type { Question} from "../types/questionTypes";
+import type { Question, ExamQuestion } from "../types/questionTypes";
 
 // Feltételezzük, hogy van egy shuffle függvényed:
 function shuffle<T>(array: T[]): T[] {
@@ -10,6 +10,29 @@ function shuffle<T>(array: T[]): T[] {
 
 export async function loadQuestions(count: number): Promise<Question[]> {
   try {
+    // Először próbáljuk az új exam_questions.json formátumot
+    const examData = await fetch("/mikroelektromechanikai-rendszerek/data/exam_questions.json").then((r) =>
+      r.json()
+    );
+    
+    if (Array.isArray(examData) && examData.length > 0) {
+      // Ez az új formátum
+      const filtered = examData.filter(
+        (q: any) =>
+          q.questionText &&
+          Array.isArray(q.options) &&
+          Array.isArray(q.correctAnswers)
+      );
+      return shuffle(filtered)
+        .slice(0, count)
+        .map((q: any) => q as ExamQuestion);
+    }
+  } catch (e) {
+    console.log("Új formátum nem elérhető, próbáljuk a régi formátumot:", e);
+  }
+
+  try {
+    // Fallback a régi formátumra
     const data = await fetch("/mikroelektromechanikai-rendszerek/data/Questions_save_cleaned.json").then((r) =>
       r.json()
     );

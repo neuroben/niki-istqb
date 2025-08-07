@@ -4,26 +4,32 @@ import { useState } from "react";
 import type { MultiOption } from "../types/questionTypes.ts";
 
 interface Props {
-  options: MultiOption[] | string[];
+  options: MultiOption[];
   statement: string;
+  isMultiple: boolean;
   onNext: (wasCorrect: boolean) => void;
 }
 
-function QuizCard({ statement, options, onNext }: Props) {
+function QuizCard({ statement, options, isMultiple, onNext }: Props) {
   const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
   //const [correctAnswer, setCorrectAnswer] = useState(false);
 
-  const items =
-    Array.isArray(options) &&
-    typeof options[0] === "object" &&
-    "text" in options[0]
-      ? (options as MultiOption[]).map((option) => option.text)
-      : (options as string[]);
+  const items = options.map((option) => option.text);
+
+  // Függvény a statement formázásához - \n karaktereket <br> tagekké alakítja
+  const formatStatement = (text: string) => {
+    return text.split('\n').map((line, index, array) => (
+      <span key={index}>
+        {line}
+        {index < array.length - 1 && <br />}
+      </span>
+    ));
+  };
 
   function handleExternalTrigger() {
     //const selectedItems = selectedIndices.map((i) => items[i]);
     //console.log("Kiválasztott elemek: ", selectedIndices);
-    const isCorrect = checkAnswer(selectedIndices, options as MultiOption[]);
+    const isCorrect = checkAnswer(selectedIndices, options);
     {
       /*if (isCorrect) {
       setCorrectAnswer(true);
@@ -54,7 +60,12 @@ function QuizCard({ statement, options, onNext }: Props) {
   return (
     <div className="card mb-0 rounded-top  shadow-sm">
       <div className="card-header py-3">
-        <h4 className="my-0 fw-normal">{statement}</h4>
+        <h4 className="my-0 fw-normal">{formatStatement(statement)}</h4>
+        {isMultiple && (
+          <div className="mt-2">
+            <small className="text-muted">Több helyes válasz lehetséges</small>
+          </div>
+        )}
       </div>
       <div className="card-body rounded">
         <ListGroup

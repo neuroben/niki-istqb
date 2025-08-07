@@ -15,4 +15,15 @@ export type MultiQuestion = {
   options: MultiOption[];
 };
 
-export type Question = SimpleQuestion | MultiQuestion;
+// Új típus az exam_questions.json formátumhoz
+export type ExamQuestion = {
+  id: number;
+  source: string;
+  topic: string;
+  questionText: string;
+  type: "single" | "multiple";
+  options: string[];
+  correctAnswers: number[];
+};
+
+export type Question = SimpleQuestion | MultiQuestion | ExamQuestion;
