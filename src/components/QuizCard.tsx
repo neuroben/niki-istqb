@@ -1,5 +1,5 @@
 import ListGroup from "./ListGroup";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import type { MultiOption } from "../types/questionTypes.ts";
 
@@ -7,14 +7,26 @@ interface Props {
   options: MultiOption[];
   statement: string;
   isMultiple: boolean;
-  onNext: (wasCorrect: boolean) => void;
+  onNext: (wasCorrect: boolean, selectedIndices: number[]) => void;
+  previousSelection?: number[]; // Felhasználó korábbi választása
 }
 
-function QuizCard({ statement, options, isMultiple, onNext }: Props) {
+function QuizCard({ statement, options, isMultiple, onNext, previousSelection }: Props) {
   const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
   //const [correctAnswer, setCorrectAnswer] = useState(false);
 
   const items = options.map((option) => option.text);
+
+  // Ha van korábbi válasz, beállítjuk a megfelelő kiválasztott opciókat
+  useEffect(() => {
+    if (previousSelection && previousSelection.length > 0) {
+      // Ha van korábbi választás, azt mutatjuk
+      setSelectedIndices(previousSelection);
+    } else {
+      // Új kérdés, nincs korábbi válasz
+      setSelectedIndices([]);
+    }
+  }, [previousSelection]);
 
   // Függvény a statement formázásához - \n karaktereket <br> tagekké alakítja
   const formatStatement = (text: string) => {
@@ -38,7 +50,7 @@ function QuizCard({ statement, options, isMultiple, onNext }: Props) {
     }*/
     }
     setSelectedIndices([]);
-    onNext(isCorrect);
+    onNext(isCorrect, selectedIndices);
   }
 
   function checkAnswer(

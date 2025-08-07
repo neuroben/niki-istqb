@@ -78,3 +78,11 @@ input, textarea, select {
   z-index: 1050; /* hogy minden fölött legyen */
   border-radius: 0;
 }
+
+.progress-bar-clickable {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.progress-bar-clickable:hover {
+  filter: brightness(1.1);
+}
